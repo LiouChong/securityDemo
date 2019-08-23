@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +31,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private MySessionExpiredStrategy sessionExpiredStrategy;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -48,10 +51,17 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and() // 鉴权配置
                     .authorizeRequests() // 授权配置
                     .antMatchers("/login.html","/css/*","/authentication/require", "/fail"
-                    ,"/code/image").permitAll()
+                    ,"/code/image", "session/invalid").permitAll()
                     .anyRequest()  // 所有请求
                     .authenticated()  // 都需要认证
-                .and().csrf().disable();
+                .and()
+                    .csrf().disable()
+                    .sessionManagement() // 添加session管理器
+                    .invalidSessionUrl("/session/invalid") // Session失效后跳转到这个链接
+                    .maximumSessions(1)
+                    .maxSessionsPreventsLogin(true) // 配置登录到最大人数以后不允许后面的登录
+                    .expiredSessionStrategy(sessionExpiredStrategy);
+
 
     }
 

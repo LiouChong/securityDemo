@@ -23,8 +23,6 @@ import java.util.Objects;
 public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private UserDao userDao;
 
     @Override

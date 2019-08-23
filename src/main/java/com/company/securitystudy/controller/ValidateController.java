@@ -2,9 +2,11 @@ package com.company.securitystudy.controller;
 
 import com.company.securitystudy.config.pojo.ImageCode;
 import com.company.securitystudy.utils.CodeUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -30,5 +32,11 @@ public class ValidateController {
         ImageCode imageCode = CodeUtil.createImageCode();
         sessionStrategy.setAttribute(new ServletWebRequest(request), SESSION_KEY_IMAGE_CODE, imageCode);
         ImageIO.write(imageCode.getImage(), "jpeg", response.getOutputStream());
+    }
+
+    @GetMapping("session/invalid")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String sessionInvalid() {
+        return "session已失效，请重新认证";
     }
 }
