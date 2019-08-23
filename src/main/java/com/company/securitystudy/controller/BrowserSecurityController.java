@@ -17,7 +17,7 @@ import java.io.IOException;
 
 /**
  * Author: Liuchong
- * Description:
+ * Description: 登录页面之前的处理类
  * date: 2019/8/20 11:36
  */
 @RestController

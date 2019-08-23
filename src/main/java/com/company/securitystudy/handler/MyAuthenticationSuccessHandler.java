@@ -1,4 +1,4 @@
-package com.company.securitystudy.config;
+package com.company.securitystudy.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

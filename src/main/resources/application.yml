@@ -8,8 +8,6 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
-  session:
-    store-type: redis
 
 #设置session有效期，超过10秒则重新登陆
 server:

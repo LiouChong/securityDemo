@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * Author: Liuchong
- * Description: 验证码验证配置
+ * Description: 登录后的验证码验证配置
  * date: 2019/8/20 17:24
  */
 @Component

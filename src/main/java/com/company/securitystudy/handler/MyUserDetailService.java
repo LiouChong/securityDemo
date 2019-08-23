@@ -1,4 +1,4 @@
-package com.company.securitystudy.config;
+package com.company.securitystudy.handler;
 
 import com.company.securitystudy.pojo.User;
 import com.company.securitystudy.dao.UserDao;
@@ -35,6 +35,6 @@ public class MyUserDetailService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(s, user.getPassword(), user.isEnabled(),
                 user.isAccountNonExpired(), user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList(user.getRole()));
     }
 }

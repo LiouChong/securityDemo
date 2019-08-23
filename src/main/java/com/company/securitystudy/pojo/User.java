@@ -48,6 +48,9 @@ public class User implements Serializable {
     @Column(name = "enabled")
     private boolean enabled= true;
 
+    @Column(name = "role")
+    private String role;
+
     public User() {
     }
 
@@ -103,6 +106,22 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
@@ -120,6 +139,8 @@ public class User implements Serializable {
                 .append(credentialsNonExpired);
         sb.append(",\"enabled\":")
                 .append(enabled);
+        sb.append(",\"role\":\"")
+                .append(role).append('\"');
         sb.append('}');
         return sb.toString();
     }

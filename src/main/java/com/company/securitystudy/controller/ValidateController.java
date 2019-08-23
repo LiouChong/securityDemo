@@ -39,4 +39,9 @@ public class ValidateController {
     public String sessionInvalid() {
         return "session已失效，请重新认证";
     }
+
+    @GetMapping("/signout/success")
+    public String signout() {
+        return "退出成功，请重新登录";
+    }
 }
